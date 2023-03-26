@@ -63,3 +63,16 @@ docker run -it --entrypoint=bash python:latest
 ```
 The numpy package is no longer installed on Python.<br>
 So, how do we keep a container with everything the application needs? Configuring it with a `DockerFile`!
+
+## Postgres
+
+We can start `POSTGRESQL` service with the following command:
+```bash
+docker run -it \
+    -e POSTGRES_USER="root" \ # Set the variable with the associated value (DB User)
+    -e POSTGRES_PASSWORD="root" \ # Set the variable with the associated value (DB Password)
+    -e POSTGRES_DB="ny_taxi" \ # Set the variable with the associated value (DB Name)
+    -v ny_taxi_postgres_data:/var/lib/postgressql/data \ # Use -v for volume mounting, maps ny_taxi_postgres_data on local machine to /var/lib/postgressql/data on Container
+    -p 5432:5432 \ # Use -p for port mapping between local machine and Container
+    postgres:13 # Docker build to start
+```z
